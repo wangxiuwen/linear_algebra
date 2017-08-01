@@ -7,11 +7,6 @@ from decimal import Decimal, getcontext
 getcontext().prec = 30
 
 
-class MyDecimal(Decimal):
-    def is_near_zero(self, eps=1e-10):
-        return abs(self) < eps
-
-
 class Vector(object):
 
     CANNOT_NORMALIZE_ZERO_VECTOR_MSG = 'Cannot normalize the zero vector'
@@ -58,14 +53,22 @@ class Vector(object):
 
     def __eq__(self, v):
         return self.coordinates == v.coordinates
-
+    
+    '''
     def is_zero(self):
         return set(self.coordinates) == set([Decimal(0)])
-    '''
-    def is_zero(self, tolerance=1e-10):
-        return self.magnitude() < tolerance
+    def is_near_zero(self, eps=1e-10):
+        return abs(self) < eps
     '''
     
+    def is_zero(self, tolerance=1e-10):
+        return self.magnitude() < tolerance
+    
+    def magnitude(self):
+        # return sqrt(sum([x**2 for x in self.coordinates]))
+        return Decimal(sqrt(sum([coord * coord
+                             for coord in self.coordinates])))
+
     def plus(self, v):
         # return Vector([x+y for x,y in zip(self.coordinates, v.coordinates)])
         return Vector(map(sum, zip(self.coordinates, v.coordinates)))
@@ -78,10 +81,7 @@ class Vector(object):
     def times_scalar(self, factor):
         return Vector([Decimal(factor) * coord for coord in self.coordinates])
    
-    def magnitude(self):
-        # return sqrt(sum([x**2 for x in self.coordinates]))
-        return Decimal(sqrt(sum([coord * coord
-                                 for coord in self.coordinates])))
+
 
     def normalized(self):
         try:
