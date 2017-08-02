@@ -31,7 +31,11 @@ class Vector(object):
     def __str__(self):
         # return 'Vector: {}'.format(self.coordinates)
         return 'Vector: {}'.format([round(coord, 3) for coord in self.coordinates])
-        
+    
+    # 判断相等
+    def __eq__(self, v):
+        return self.coordinates == v.coordinates
+    
     # 判断是否为0向量
     def is_zero(self, tolerance=1e-10):
         return self.magnitude() < tolerance

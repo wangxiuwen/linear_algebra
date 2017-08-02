@@ -8,9 +8,6 @@
     def is_near_zero(self, eps=1e-10):
         return abs(self) < eps
    
-    def __eq__(self, v):
-        return self.coordinates == v.coordinates
-        
      def __iter__(self):
         self.current = 0
         return self
@@ -29,21 +26,6 @@
     def __getitem__(self, i):
         return self.coordinates[i]
 
-    def __str__(self):
-        # return 'Vector: {}'.format(self.coordinates)
-        return 'Vector: {}'.format([round(coord, 3)
-                                    for coord in self.coordinates])
-                                    
-    def get_projected_vector(self, other):
-        """
-        Gets projection of vector v in b
-        """
-        b_normalized = other.normalized()
-        return b_normalized.times_scalar(self.dot(b_normalized))
-    
-    def get_orthogonal_vector(self, other):
-        return self.minus(self.get_projected_vector(other)) 
-
     def get_angle_rad(self, other):
         dot_prod = round(self.normalized().dot(other.normalized()), 3)
         return acos(dot_prod)
@@ -60,8 +42,4 @@
         z = (x1 * y2) - (x2 * y1)
         return Vector([x, y, z])
 
-    def area_parallelogram(self, other):
-        return self.cross_product(other).magnitude()
-
-    def area_triangle(self, other):
-        return self.cross_product(other).magnitude() / 2
+  
