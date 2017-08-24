@@ -117,9 +117,11 @@ class Vector(object):
         return abs(self.dot(v)) < tolerance
     
     # 判断平行  
-    def is_parallel_to(self, v):
-        return abs(self.is_zero() or v.is_zero() or self.angle_with(v) == 0 or self.angle_with(v) == pi)
-    
+    def is_parallel_to(self, v, tolerance=1e-6):
+        print self, v
+        return abs(self.is_zero() or v.is_zero() or 
+                self.angle_with(v) == 0 or self.angle_with(v) == pi)
+        
     # 计算向量夹角
     def angle_with(self, v, in_degrees=False):
         try:
@@ -168,39 +170,45 @@ class Vector(object):
 
 if __name__ == '__main__':
 
-    # 判断两个向量是否相等
+    print '判断两个向量是否相等:'
     v = Vector([1,2,3])
     w = Vector([1,2,3])
     print v	== w
+    print '\r\n'
 
-    # 向量相加
+    print '向量相加:'
     v = Vector([8.218, -9.341])
     w = Vector([-1.129, 2.111])
     addition = v.plus(w)
     print 'addition: {}'.format(addition)
+    print '\r\n'
     
-    # 向量相减
+    print '向量相减:'
     v = Vector([7.119, 8.215])
     w = Vector([-8.223, 0.878])
     subtraction = v.minus(w)
     print 'subtraction: {}'.format(subtraction)
+    print '\r\n'
 
-    # 与标量相乘
+    print '与标量相乘:'
     v = Vector([1.671, -1.012, -0.318])
     multiplication = v.times_scalar(7.41)
     print 'multiplication: {}'.format(multiplication)
+    print '\r\n'
 
-    # 计算长度
+    print '计算长度:'
     v = Vector([-0.221, 7.437])
     w = Vector([8.813, -1.331, -6.247])
     
     first_magintude = v.magnitude()
     print 'first_magintude: {}'.format(round(first_magintude, 3))
+    
 
     second_magintude = w.magnitude()
     print 'second_magintude: {}'.format(round(second_magintude, 3))
+    print '\r\n'
 
-    # 向量标准化
+    print '向量标准化:'
     v = Vector([5.581, -2.136])
     w = Vector([1.996, 3.108, -4.554])
     
@@ -209,8 +217,9 @@ if __name__ == '__main__':
 
     second_normalization = w.normalized()
     print 'second_normailization: {}'.format(second_normalization)
-
-    # 求 v, w 点积
+    print '\r\n'
+    
+    print '求 v, w 点积:'
     v1 = Vector([7.887, 4.138])
     w1 = Vector([-8.802, 6.776])
     
@@ -222,20 +231,23 @@ if __name__ == '__main__':
 
     dot = v2.dot(w2)
     print 'second_dot: {}'.format(round(dot, 3))
-
-    # 求 v, w 夹角, 单位rad
+    print '\r\n'
+    
+    print '求 v, w 夹角, 单位rad:'
     v = Vector([3.183, -7.627])
     w = Vector([-2.668, 5.319])
-    angle_rads = v.angle_with(w)
+    angle_rads = v.angle_with(w,True)
     print 'first_angle_rads: {}'.format(angle_rads)
-
-    # 求 v, w 夹角, 单位度
+    print '\r\n'
+    
+    print '求 v, w 夹角, 单位度:'
     v = Vector([7.35, 0.221, 5.188])
     w = Vector([2.751, 8.259, 3.985])
     angle_degrees = v.angle_with(w, True)
     print 'first_angle_rads: {}'.format(angle_degrees)
-
-    # 判断向量平行还是正交
+    print '\r\n'
+    
+    print '判断向量平行还是正交:'
     v1 = Vector([-7.579, -7.88])
     w1 = Vector([22.737, 23.64])
     
@@ -263,8 +275,9 @@ if __name__ == '__main__':
     is_parallel = v4.is_parallel_to(w4)
     is_orthogonal = v4.is_orthogonal_to(w4)
     print '4 parallel: {}, orthogonal: {}'.format(is_parallel, is_orthogonal)
-
-    # 计算投影
+    print '\r\n'
+    
+    print '计算投影:'
     v = Vector([3.039, 1.879])
     w = Vector([0.825, 2.036])
     print 'component_parallel_to: {}'.format(v.component_parallel_to(w))
@@ -279,8 +292,9 @@ if __name__ == '__main__':
     vort = v.component_orthogonal_to(w)
     print 'parallel component:', vpar
     print 'orthogonal component:', vort
+    print '\r\n'
     
-    # 计算叉积
+    print '计算叉积:'
     v1 = Vector([8.462, 7.893, -8.187])
     w1 = Vector([6.984, -5.975, 4.778])
 
