@@ -60,9 +60,8 @@ class Vector(object):
     
     # 计算长度
     def magnitude(self):
-        # return sqrt(sum([x**2 for x in self.coordinates]))
-        return Decimal(sqrt(sum([coord * coord
-                             for coord in self.coordinates])))
+        return Decimal(sqrt(sum([x**2 for x in self.coordinates])))
+        #return Decimal(sqrt(sum([coord * coord for coord in self.coordinates])))
 
     def plus(self, v):
         # return Vector([x+y for x,y in zip(self.coordinates, v.coordinates)])
@@ -130,8 +129,9 @@ class Vector(object):
             d = n1.dot(n2)
             d = min(d, Decimal('1'))
             d = max(d, Decimal('0'))
-            angle_in_radians = acos(d)
-
+            # angle_in_radians = acos(d)
+            angle_in_radians = acos(round(d,2))
+                
             if in_degrees:
                 degrees_per_radian = 180. / pi
                 return angle_in_radians * degrees_per_radian
@@ -203,7 +203,6 @@ if __name__ == '__main__':
     first_magintude = v.magnitude()
     print 'first_magintude: {}'.format(round(first_magintude, 3))
     
-
     second_magintude = w.magnitude()
     print 'second_magintude: {}'.format(round(second_magintude, 3))
     print '\r\n'
@@ -234,9 +233,9 @@ if __name__ == '__main__':
     print '\r\n'
     
     print '求 v, w 夹角, 单位rad:'
-    v = Vector([3.183, -7.627])
-    w = Vector([-2.668, 5.319])
-    angle_rads = v.angle_with(w,True)
+    v = Vector(['3.183', '-7.627'])
+    w = Vector(['-2.668', '5.319'])
+    angle_rads = v.angle_with(w)
     print 'first_angle_rads: {}'.format(angle_rads)
     print '\r\n'
     
