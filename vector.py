@@ -117,19 +117,16 @@ class Vector(object):
     
     # 判断平行  
     def is_parallel_to(self, v, tolerance=1e-6):
-        print self, v
         return abs(self.is_zero() or v.is_zero() or 
                 self.angle_with(v) == 0 or self.angle_with(v) == pi)
         
     # 计算向量夹角
     def angle_with(self, v, in_degrees=False):
         try:
-            n1 = self.normalized()
-            n2 = v.normalized()
-            d = n1.dot(n2)
-            d = min(d, Decimal('1'))
-            d = max(d, Decimal('0'))
-            # angle_in_radians = acos(d)
+            u1 = self.normalized()
+            u2 = v.normalized()
+            d = u1.dot(u2)
+            
             angle_in_radians = acos(round(d,2))
                 
             if in_degrees:
@@ -235,6 +232,7 @@ if __name__ == '__main__':
     print '求 v, w 夹角, 单位rad:'
     v = Vector(['3.183', '-7.627'])
     w = Vector(['-2.668', '5.319'])
+    
     angle_rads = v.angle_with(w)
     print 'first_angle_rads: {}'.format(angle_rads)
     print '\r\n'
